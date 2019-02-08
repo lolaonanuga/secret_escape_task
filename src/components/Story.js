@@ -18,7 +18,7 @@ class Story extends Component {
 
   
     addScore = () => {
-        console.log('yo')
+      
         this.setState({score: this.state.score +1})
     }
     

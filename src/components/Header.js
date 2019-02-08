@@ -1,16 +1,16 @@
 import React from 'react'
-import { Menu, Input} from 'semantic-ui-react'
+import { Menu, Input, Form} from 'semantic-ui-react'
 
-const Header = ({search}) => {
+const Header = ({search, filterBy}) => {
 
     return (
         <Menu text>
             <Menu.Header>
-            <h1>Hacker News</h1>
+           <span className="logo-title"><h1 id="logo">Y</h1></span> <span className="logo-title"><h1>Hacker News</h1></span>
           </Menu.Header>
   
            <Menu.Item position='right'>
-              <Input icon='search' placeholder='Search...'  onChange={(e) => search(e)} />
+              <Form><Input icon='search' placeholder='Search...'  onChange={(e) => {filterBy(e.target.value)}} /></Form>
             </Menu.Item>
         
   

@@ -7,7 +7,7 @@
 .nav {
   padding: 2px 20px;
   margin-bottom: 2%;
-  background:rgb(250, 240, 242);
+  background:#ff6600;
 }
 
 .ui.menu {
@@ -15,10 +15,22 @@
 
 }
 
+.logo-title {
+  display: inline-block;
+}
+
+#logo {
+  border: 1px solid white;
+  color: white;
+  padding: 5px 10px;
+  margin-right: 10px;
+  
+}
+
 .ui.six.doubling.cards {
   /* margin: 0% 10%; */
   padding: 0 5%;
-  
+
 }
 
  
@@ -35,4 +47,8 @@
   height: 20rem;
   display: inline-grid;
   margin: 0.4rem 0.4rem;
+}
+
+.label {
+  padding: 2% 5%;
 }

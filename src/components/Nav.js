@@ -2,10 +2,11 @@ import React, { Component } from 'react'
 import { Menu, Input} from 'semantic-ui-react'
 
  class Nav extends Component {
-  state = { activeItem: '' }
+   
+  state = { activeItem: 'All' }
 
   handleItemClick = (e, { name }) => {
-    this.setState({ activeItem: name },this.props.sort(name))
+    this.setState({ activeItem: name },this.props.filterBy(name))
     
   }
 
@@ -15,24 +16,32 @@ import { Menu, Input} from 'semantic-ui-react'
     return (
       <Menu text>
        
-        <Menu.Item header>Sort By</Menu.Item>
+        <Menu.Item header>View:</Menu.Item>
+      
+
         <Menu.Item
-          name='Author (a-z)'
-          active={activeItem === 'Author (a-z)'}
-          onClick={this.handleItemClick}
+        name='All'
+        active={activeItem === 'All stories'}
+        onClick={this.handleItemClick}
         />
-         <Menu.Item
+          <Menu.Item
           name='Latest'
           active={activeItem === 'Latest'}
           onClick={this.handleItemClick}
         />
         <Menu.Item
-          name='Highest Rated'
-          active={activeItem === 'Highest Rated'}
+          name='Show HN'
+          active={activeItem === 'Show HN'}
           onClick={this.handleItemClick}
         />
-       
-      
+         <Menu.Item
+          name='Ask HN'
+          active={activeItem === 'Ask HN'}
+          onClick={this.handleItemClick}
+        />
+
+        
+
 
       </Menu>
     )
