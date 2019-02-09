@@ -3,8 +3,10 @@
 A redesign of Y Combinator's Hacker News site, using their API
 
 ## Technologies used
-[React](https://reactjs.org)
-[Semantic UI](https://semantic-ui.com)
+
+- [React](https://reactjs.org)
+- [Semantic UI](https://semantic-ui.com)
+- [React-Testing-Library](https://github.com/kentcdodds/react-testing-library)
 
 
 ## Installing
@@ -21,13 +23,6 @@ Visit (http://localhost:3000) to view it in the browser.
 ```
 npm test 
 ```
-
-## Built With
-
-- [React](https://reactjs.org)
-- [Express](https://expressjs.com)
-- [React-Testing-Library](https://github.com/kentcdodds/react-testing-library)
-
 
 ## Building the site
 
