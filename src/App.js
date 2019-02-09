@@ -110,7 +110,6 @@ class App extends Component {
 
   render() {
     const stories = (this.state.filter === 'All' ? this.state.stories : this.state.filteredStories )
-   
     const {loading} = this.state
     const {filterBy, subHeading} = this
     return (

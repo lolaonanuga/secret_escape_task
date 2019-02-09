@@ -6,17 +6,10 @@ import Story from './components/Story';
 import Header from './components/Header'
 import Nav from './components/Nav';
 import {render, fireEvent} from "react-testing-library"
-// import "dom-testing-library/extend-expect"
-
-// it('renders without crashing', () => {
-//   const div = document.createElement('div');
-//   ReactDOM.render(<App />, div);
-//   ReactDOM.unmountComponentAtNode(div);
-// });
 
 
-describe('NewsFeed', () => {
-  let ids = [ 19120622,19120633,19120644]
+describe('Hacker News', () => {
+
   let stories = [
       {
         by: "nabla9",
@@ -40,15 +33,13 @@ describe('NewsFeed', () => {
       }
     ]
 
-      const createProps = props => ({ 
-         stories: stories,
-         addScore: jest.fn(),
-         filterBy: jest.fn(),
-         handleItemClick: jest.fn(),
-        ...props 
+    const createProps = props => ({ 
+      stories: stories,
+      addScore: jest.fn(),
+      filterBy: jest.fn(),
+      handleItemClick: jest.fn(),
+      ...props 
       })
-
-
 
 
   it('renders each story', () => {
@@ -64,7 +55,6 @@ describe('NewsFeed', () => {
     const searchTerm = "fraud"
     let props = createProps()
     const { container } = render(<Header {...props} />)
-    
     const searchNode = container.querySelector('.ui.form input')
     
     fireEvent.change(searchNode, {
@@ -76,14 +66,11 @@ describe('NewsFeed', () => {
  
   
   it('filters news stories with site link options', () => {
-   
-    
     let props = createProps()
     const { container } = render(<Nav {...props} />)
-    const storyNodes = container.querySelectorAll('#card')
     const latest = container.querySelector('#latest')
+
     fireEvent.click(latest)
- 
     expect(props.filterBy).toHaveBeenCalledTimes(1)
     expect(props.filterBy).toHaveBeenCalledWith("Latest")
   }) 
@@ -95,8 +82,10 @@ describe('NewsFeed', () => {
     const { getByTestId } = render(<StoryContainer {...props} />)
     const likeNode = getByTestId(id)
     const scoreNode = likeNode.nextSibling 
+
     fireEvent.click(likeNode)
     expect(Number(scoreNode.innerHTML) ).toEqual(props.stories[1].score + 1)
+
     fireEvent.click(likeNode)
     expect(Number(scoreNode.innerHTML) ).toEqual(props.stories[1].score + 1)
   }) 
