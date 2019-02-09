@@ -29,13 +29,6 @@ npm test
 [React-Testing-Library](https://github.com/kentcdodds/react-testing-library)
 
 
-## Building the app
-Code structure and clarity of the code
-● Decisions made to enhance the user experience
-● Examples of test driven development (100% coverage not required)
-● HTML/CSS skills
-● JS skills
-
 ## Building the site
 
 The original Hacker News website displays stories as a very basic old school list. It is quite tricky to figure out if the stories have been sorted by score or date. Despite the really interesting news stories, is pretty boring to look at, and hasn't been optimized for mobile devices. 
