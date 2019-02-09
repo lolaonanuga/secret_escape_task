@@ -24,9 +24,9 @@ npm test
 
 ## Built With
 
-[React](https://reactjs.org)
-[Express](https://expressjs.com)
-[React-Testing-Library](https://github.com/kentcdodds/react-testing-library)
+- [React](https://reactjs.org)
+- [Express](https://expressjs.com)
+- [React-Testing-Library](https://github.com/kentcdodds/react-testing-library)
 
 
 ## Building the site
