@@ -19,6 +19,12 @@
   display: inline-block;
 }
 
+
+
+.info {
+  display: inline-block;
+}
+
 #logo {
   border: 1px solid white;
   color: white;
@@ -51,4 +57,19 @@
 
 .label {
   padding: 2% 5%;
+}
+
+.load-container {
+  display: flex;
+  justify-content: center
+}
+
+.loading {
+  height: 30px;
+  width: 30px;
+}
+
+.score {
+  display: block;
+  align-self: flex-end;
 }

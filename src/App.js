@@ -9,15 +9,16 @@ class App extends Component {
 
   state = {
     storyIDs: null,
-    stories: [],
-    filter: null,
+    stories: null,
+    filter: "All",
     searchTerm: '',
-    filteredStories: []
+    filteredStories: null,
+    loading:true
   }
 
   filterBy = (term) => {
    
-    this.setState({filter: null},  () => {
+    this.setState({filter: null, loading:true},  () => {
   
    
     switch (term) {
@@ -50,8 +51,10 @@ class App extends Component {
     default:
     this.setState({
       filter: term, 
-      filteredStories: this.searchResults(term)})
+      filteredStories: this.searchResults(term)
+      })
     }
+    setTimeout(() =>  this.setState({loading:false }), 2000)
   })
   
   }
@@ -70,43 +73,51 @@ class App extends Component {
     })
     return sortedByTime.slice(0,50)
   }
-
-  sort = (sortType) => { console.log(sortType)
-    this.setState({sort: sortType, stories:this.sortResults(sortType)}) }
-
   
 
   componentDidMount() {
+   let storyArray = []
+    let storyIDs = []
+
     axios.get(`https://hacker-news.firebaseio.com/v0/topstories.json/`)
       .then(res => {
-        const storyIDs = res.data;
-        this.setState({ storyIDs: storyIDs }, 
-          storyIDs.forEach(id => 
-            axios.get(`https://hacker-news.firebaseio.com/v0/item/${id}.json`)
-            .then(res => this.setState({stories: [...this.state.stories,res.data] }))
-          ));
+        storyIDs = [...res.data]
+     
       })
+      .then(() =>
+       
+          storyIDs.forEach(id => {
+            
+            axios.get(`https://hacker-news.firebaseio.com/v0/item/${id}.json`)
+            .then(res =>  storyArray.push(res.data))    
+          }))
+          .then(() => this.setState({stories: storyArray }) )
+          .then(() =>  setTimeout(() =>  this.setState({loading:false }), 5000)  )
   }
 
 
 
 
   render() {
-    const stories = (!this.state.filter ? this.state.stories : this.state.filteredStories )
-    if (this.state.filter) {console.log(stories)}
-    const {storyIDs, filter} = this.state
-    const {filterBy, sortBy} = this
+    const stories = (this.state.filter === 'All' ? this.state.stories : this.state.filteredStories )
+   
+    const {storyIDs, filter, loading} = this.state
+    const {filterBy} = this
     return (
       <div className="app-container"> 
       <div className="nav">
         <Header filterBy={filterBy} />
-        <Nav filterBy={filterBy} sort={sortBy} />
+        <Nav filterBy={filterBy}  />
         </div>
         <h2 className="label">{ filter ? 'Filter: ' + '"' + filter + '"' : 'All Stories'}</h2>
-        {storyIDs ?
-        <StoryContainer className="story-container" stories={stories} />
+        {!loading?
+        <StoryContainer className="story-container" stories={stories} /> 
        :
-       <p className="loading">Loading</p>}
+       <div className="load-container">
+          <img className="loading" src="https://loading.io/spinners/dual-ring/lg.dual-ring-loader.gif" />
+       </div>}
+       {console.log(stories)}
+    
       </div>
     );
   }
