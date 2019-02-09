@@ -8,55 +8,53 @@ class App extends Component {
 
 
   state = {
-    storyIDs: null,
+   
     stories: null,
     filter: "All",
-    searchTerm: '',
     filteredStories: null,
     loading:true
   }
 
   filterBy = (term) => {
    
-    this.setState({filter: null, loading:true},  () => {
+    this.setState({filter: null, loading:true}, () => {
   
-   
-    switch (term) {
+      switch (term) {
 
-    case 'All':
-    break;
+      case 'All':
+        this.setState({
+        filter: 'All'})
+      break;
 
-    case 'Latest':
-    this.setState({
-      filter: 'Latest',
-      filteredStories: this.sortbyTime()
-    })
-    break;
-
-    case 'Ask HN':
-   
-    this.setState({
-      filter: term,
-      filteredStories: this.searchResults('Ask HN')
-    })
-    break;
-    
-    case 'Show HN':
-    this.setState({
-      filter: 'Show HN',
-      filteredStories: this.searchResults('Show HN')
-    })
-    break;
-
-    default:
-    this.setState({
-      filter: term, 
-      filteredStories: this.searchResults(term)
+      case 'Latest':
+        this.setState({
+        filter: 'Latest',
+        filteredStories: this.sortbyTime()
       })
-    }
-    setTimeout(() =>  this.setState({loading:false }), 2000)
-  })
-  
+      break;
+
+      case 'Ask HN':
+        this.setState({
+        filter: term,
+        filteredStories: this.searchResults('Ask HN')
+      })
+      break;
+      
+      case 'Show HN':
+        this.setState({
+        filter: 'Show HN',
+        filteredStories: this.searchResults('Show HN')
+      })
+      break;
+
+      default:
+        this.setState({
+        filter: term, 
+        filteredStories: this.searchResults(term)
+        })
+      }
+      setTimeout(() => this.setState({loading:false }), 2000)
+    })
   }
 
   subHeading = () => {
@@ -64,27 +62,20 @@ class App extends Component {
 
       case 'All':
         return  "All stories"
-      break;
       case 'Latest':
         return "Latest stories"
-      break;
       case 'Ask HN':
         return "Ask HN"
-      break;
       case 'Show HN':
         return "Show HN"
-      break;
       default:
         return `Search results for: ${this.state.filter}`
-      
     }
   }
 
-  
 
   searchResults = (term) => this.state.stories.filter(story => story.title.includes(term))
   
- 
 
   sortbyTime = () => {
     const sortedByTime =  this.state.stories.sort( (a, b) => {
@@ -111,7 +102,7 @@ class App extends Component {
             .then(res =>  storyArray.push(res.data))    
           }))
           .then(() => this.setState({stories: storyArray }) )
-          .then(() =>  setTimeout(() =>  this.setState({loading:false }), 5000)  )
+          .then(() =>  setTimeout(() =>  this.setState({loading:false }), 5000))
   }
 
 
@@ -120,23 +111,22 @@ class App extends Component {
   render() {
     const stories = (this.state.filter === 'All' ? this.state.stories : this.state.filteredStories )
    
-    const {storyIDs, filter, loading} = this.state
+    const {loading} = this.state
     const {filterBy, subHeading} = this
     return (
       <div className="app-container"> 
-      <div className="nav">
-        <Header filterBy={filterBy} />
-        <Nav filterBy={filterBy}  />
+        <div className="nav">
+          <Header filterBy={filterBy} />
+          <Nav filterBy={filterBy}  />
         </div>
         <h2 className="sub-header">{subHeading()}</h2>
         {!loading?
-        <StoryContainer className="story-container" stories={stories} /> 
-       :
-       <div className="load-container">
-          <img className="loading" src="https://loading.io/spinners/dual-ring/lg.dual-ring-loader.gif" />
-       </div>}
-       
-
+          <StoryContainer className="story-container" stories={stories} /> 
+        :
+          <div className="load-container">
+            <img className="loading" src="https://loading.io/spinners/dual-ring/lg.dual-ring-loader.gif" alt='loading' />
+          </div>
+        }
       </div>
     );
   }

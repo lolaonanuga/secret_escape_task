@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Menu, Input} from 'semantic-ui-react'
+import { Menu} from 'semantic-ui-react'
 
  class Nav extends Component {
    
@@ -7,7 +7,6 @@ import { Menu, Input} from 'semantic-ui-react'
 
   handleItemClick = (e, { name }) => {
     this.setState({ activeItem: name },this.props.filterBy(name))
-    
   }
 
   render() {
@@ -15,34 +14,31 @@ import { Menu, Input} from 'semantic-ui-react'
 
     return (
       <Menu text>
-       
         <Menu.Item header>View:</Menu.Item>
-      
-
         <Menu.Item
-        name='All'
-        active={activeItem === 'All stories'}
-        onClick={this.handleItemClick}
+          name='All'
+          id="all"
+          active={activeItem === 'All stories'}
+          onClick={this.handleItemClick}
         />
-          <Menu.Item
+        <Menu.Item
           name='Latest'
+          id="latest"
           active={activeItem === 'Latest'}
           onClick={this.handleItemClick}
         />
         <Menu.Item
           name='Show HN'
+          id="show"
           active={activeItem === 'Show HN'}
           onClick={this.handleItemClick}
         />
          <Menu.Item
           name='Ask HN'
+          id="ask"
           active={activeItem === 'Ask HN'}
           onClick={this.handleItemClick}
         />
-
-        
-
-
       </Menu>
     )
   }
