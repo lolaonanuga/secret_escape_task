@@ -59,7 +59,26 @@ class App extends Component {
   
   }
 
+  subHeading = () => {
+    switch (this.state.filter) {
 
+      case 'All':
+        return  "All stories"
+      break;
+      case 'Latest':
+        return "Latest stories"
+      break;
+      case 'Ask HN':
+        return "Ask HN"
+      break;
+      case 'Show HN':
+        return "Show HN"
+      break;
+      default:
+        return `Search results for: ${this.state.filter}`
+      
+    }
+  }
 
   
 
@@ -102,22 +121,22 @@ class App extends Component {
     const stories = (this.state.filter === 'All' ? this.state.stories : this.state.filteredStories )
    
     const {storyIDs, filter, loading} = this.state
-    const {filterBy} = this
+    const {filterBy, subHeading} = this
     return (
       <div className="app-container"> 
       <div className="nav">
         <Header filterBy={filterBy} />
         <Nav filterBy={filterBy}  />
         </div>
-        <h2 className="label">{ filter ? 'Filter: ' + '"' + filter + '"' : 'All Stories'}</h2>
+        <h2 className="sub-header">{subHeading()}</h2>
         {!loading?
         <StoryContainer className="story-container" stories={stories} /> 
        :
        <div className="load-container">
           <img className="loading" src="https://loading.io/spinners/dual-ring/lg.dual-ring-loader.gif" />
        </div>}
-       {console.log(stories)}
-    
+       
+
       </div>
     );
   }

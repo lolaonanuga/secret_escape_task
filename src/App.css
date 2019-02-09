@@ -53,23 +53,34 @@
   height: 20rem;
   display: inline-grid;
   margin: 0.4rem 0.4rem;
+  box-shadow:none;
 }
 
-.label {
+#card:hover {
+ 
+    background: rgb(77, 12, 23)
+}
+
+.sub-header {
   padding: 2% 5%;
 }
 
 .load-container {
   display: flex;
-  justify-content: center
+  justify-content: center;
+  padding: 15% 0;
 }
 
 .loading {
   height: 30px;
   width: 30px;
+ 
 }
 
 .score {
-  display: block;
-  align-self: flex-end;
+  position:absolute;
+  bottom:0;
+  right:0;
+  padding:10px;
+
 }
